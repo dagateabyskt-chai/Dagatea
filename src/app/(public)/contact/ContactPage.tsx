@@ -41,7 +41,7 @@ export default function ContactPage() {
         body: JSON.stringify(data),
       };
 
-      const response = await fetch("http://localhost:3000/api/send", requestOptions)
+      const response = await fetch("/api/send", requestOptions)
       const result = await response.json();
       if (result.success) {
         toast.success(result.message, {
