@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import ContactPage from "./ContactPage";
 
+const baseUrl = process.env.NEXT_PUBLIC_HOST;
+
 export const metadata: Metadata = {
   title: {
     default:
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   creator: "Daga Tea",
   publisher: "Daga Tea Traders",
 
-  metadataBase: new URL("https://dagatea.company"),
+  metadataBase: new URL(baseUrl),
 
   robots: {
     index: true,
@@ -53,11 +55,11 @@ export const metadata: Metadata = {
       "Contact Daga Tea | Assam CTC Tea Supplier in Rajasthan (Wholesale & Bulk)",
     description:
       "Get in touch with Daga Tea Traders for high-quality Assam CTC tea. Serving wholesalers and retailers across Rajasthan and India.",
-    url: "https://dagatea.company/contact",
+    url: `${baseUrl}/contact`,
     siteName: "Daga Tea",
     images: [
       {
-        url: "https://dagatea.company/images/daga-premium-tea.jpeg",
+        url: `${baseUrl}/images/daga-premium-tea.jpeg`,
         width: 1200,
         height: 630,
         alt: "Daga Tea - Contact Assam Tea Supplier Rajasthan",
@@ -72,11 +74,11 @@ export const metadata: Metadata = {
     title: "Contact Daga Tea | Bulk Tea Supplier Rajasthan",
     description:
       "Reach out to Daga Tea Traders for wholesale Assam CTC tea supply in Bikaner and across India.",
-    images: ["https://dagatea.company/images/daga-premium-tea.jpeg"],
+    images: [`${baseUrl}/images/daga-premium-tea.webp`],
   },
 
   alternates: {
-    canonical: "https://dagatea.company/contact",
+    canonical: `${baseUrl}/contact`,
   },
 
   // 🔥 ADVANCED: CONTACT INTENT SIGNAL
@@ -102,7 +104,7 @@ const contactSchema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   name: "Contact Daga Tea",
-  url: "https://dagatea.company/contact",
+  url: `${baseUrl}/contact`,
 
   mainEntity: {
     "@type": "LocalBusiness",

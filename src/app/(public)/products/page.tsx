@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import ProductsPage from "./ProductsPage";
 import { cardData } from "@/data/productInfo";
 
+const baseUrl = process.env.NEXT_PUBLIC_HOST;
+
 export const metadata: Metadata = {
   title: {
     default:
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
   creator: "Daga Tea",
   publisher: "Daga Tea Traders",
 
-  metadataBase: new URL("https://dagatea.company"),
+  metadataBase: new URL(baseUrl),
 
   robots: {
     index: true,
@@ -56,11 +58,11 @@ export const metadata: Metadata = {
       "Daga Tea Products | Assam CTC Tea Supplier for Wholesale & Bulk Buyers",
     description:
       "Browse premium Assam CTC tea products from Daga Tea including loose and packaged tea for retailers and distributors across India.",
-    url: "https://dagatea.company/products",
+    url: `${baseUrl}/products`,
     siteName: "Daga Tea",
     images: [
       {
-        url: "https://dagatea.company/images/daga-products-banner.jpg",
+        url: `${baseUrl}/images/daga-products-banner.jpg`,
         width: 1200,
         height: 630,
         alt: "Daga Tea Products - Assam CTC Tea Supplier",
@@ -76,11 +78,11 @@ export const metadata: Metadata = {
     title: "Buy Assam Tea Online | Daga Tea Products",
     description:
       "Shop premium Assam CTC tea from Daga Tea. Bulk supply available for wholesalers and retailers across India.",
-    images: ["https://dagatea.company/images/daga-products-banner.jpg"],
+    images: [`${baseUrl}/images/daga-products-banner.jpg`],
   },
 
   alternates: {
-    canonical: "https://dagatea.company/products",
+    canonical: `${baseUrl}/products`,
   },
 
   // 🔥 CATEGORY + CLASSIFICATION
@@ -108,18 +110,18 @@ const generateProductSchemas = (products: typeof cardData) => {
       item: {
         "@type": "Product",
 
-        "@id": `https://dagatea.company/products/${product.Product
+        "@id": `${baseUrl}/products#${product.Product
           .toLowerCase()
-          .replace(/\s+/g, "-")}#product`,
+          .replace(/\s+/g, "-")}`,
 
         name: product.Product,
         description: product.Description,
         category: product.Category,
 
         image: [
-          `https://dagatea.company/images/${product.Product
+          `${baseUrl}/images/${product.Product
             .toLowerCase()
-            .replace(/\s+/g, "-")}.jpg`
+            .replace(/\s+/g, "-")}.webp`
         ],
 
         brand: {
@@ -142,7 +144,7 @@ const generateProductSchemas = (products: typeof cardData) => {
           priceCurrency: "INR",
           price: product.Size[0].replace("₹", ""),
           availability: "https://schema.org/InStock",
-          url: `https://dagatea.company/products/${product.Product
+          url: `${baseUrl}/products/${product.Product
             .toLowerCase()
             .replace(/\s+/g, "-")}`
         }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import BrewingGuidePage from "./BrewGuidePage";
 
+const baseUrl = process.env.NEXT_PUBLIC_HOST;
+
 export const metadata: Metadata = {
   title: {
     default:
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
   creator: "Daga Tea",
   publisher: "Daga Tea Traders",
 
-  metadataBase: new URL("https://dagatea.company"),
+  metadataBase: new URL(`${baseUrl}`),
 
   robots: {
     index: true,
@@ -47,11 +49,11 @@ export const metadata: Metadata = {
       "How to Brew Perfect Assam Tea | Expert Brewing Guide by Daga Tea",
     description:
       "Step-by-step tea brewing guide for making perfect Assam CTC chai. Learn pro tips used by tea experts and suppliers.",
-    url: "https://dagatea.company/brewguide",
+    url: `${baseUrl}/brewguide`,
     siteName: "Daga Tea",
     images: [
       {
-        url: "https://dagatea.company/images/brewing-guide.jpg",
+        url: `${baseUrl}/images/brewing-guide.jpg`,
         width: 1200,
         height: 630,
         alt: "How to Brew Perfect Assam CTC Tea - Daga Tea Guide",
@@ -68,11 +70,11 @@ export const metadata: Metadata = {
     title: "How to Brew Perfect Tea | Daga Tea Guide",
     description:
       "Master the art of brewing Assam CTC tea with expert tips on time, temperature, and taste.",
-    images: ["https://dagatea.company/images/brewing-guide.jpg"],
+    images: [`${baseUrl}/gif/milk-tea.gif`],
   },
 
   alternates: {
-    canonical: "https://dagatea.company/brewguide",
+    canonical: `${baseUrl}/brewguide`,
   },
 
   // 🔥 CONTENT CLASSIFICATION (HELPS SEO CONTEXT)
@@ -99,7 +101,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
 
-  "@id": "https://dagatea.company/brewguide#article",
+  "@id": `${baseUrl}/brewguide#article`,
 
   headline: "How to Brew Perfect Assam CTC Tea",
 
@@ -107,7 +109,7 @@ const schema = {
     "Learn how to brew the perfect cup of Assam CTC tea with the right temperature, time, and techniques used by tea experts.",
 
   image: [
-    "https://dagatea.company/images/brewing-guide.jpg"
+    `${baseUrl}/gif/milk-tea.gif`
   ],
 
   author: {
@@ -120,7 +122,7 @@ const schema = {
     name: "Daga Tea",
     logo: {
       "@type": "ImageObject",
-      url: "https://dagatea.company/images/logo.png"
+      url: `${baseUrl}/images/logo.png`
     }
   },
 
@@ -129,7 +131,7 @@ const schema = {
 
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://dagatea.company/brewguide"
+    "@id": `${baseUrl}/brewguide`
   }
 };
 

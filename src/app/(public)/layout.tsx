@@ -20,6 +20,8 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_HOST;
+
 export const metadata: Metadata = {
   title: {
     default:
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
   creator: "Daga Tea",
   publisher: "Daga Tea Traders",
 
-  metadataBase: new URL("https://dagatea.company"),
+  metadataBase: new URL(baseUrl),
 
   robots: {
     index: true,
@@ -73,11 +75,11 @@ export const metadata: Metadata = {
       "Daga Tea | Premium Assam CTC Tea Supplier in Rajasthan (Wholesale & Bulk)",
     description:
       "Trusted tea supplier offering high-quality Assam CTC tea for wholesalers, retailers, and bulk buyers across India.",
-    url: "https://dagatea.company",
+    url: baseUrl,
     siteName: "Daga Tea",
     images: [
       {
-        url: "https://dagatea.company/images/daga-premium-tea.jpg",
+        url: `${baseUrl}/images/daga-premium-tea.webp`,
         width: 1200,
         height: 630,
         alt: "Daga Tea - Assam CTC Tea Supplier Rajasthan",
@@ -93,11 +95,11 @@ export const metadata: Metadata = {
     title: "Daga Tea | Assam Tea Supplier India",
     description:
       "Premium Assam CTC tea supplier for wholesale and retail across Rajasthan and India.",
-    images: ["https://dagatea.company/images/daga-premium-tea.jpg"],
+    images: [`${baseUrl}/images/daga-premium-tea.webp`],
   },
 
   alternates: {
-    canonical: "https://dagatea.company",
+    canonical: baseUrl,
   },
 
   // 🔥 CATEGORY + BRAND SIGNAL
@@ -123,13 +125,13 @@ export const metadata: Metadata = {
 const schema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://dagatea.company/#business",
+  "@id": `${baseUrl}/#business`,
 
   name: "Daga Tea Traders",
   alternateName: "Shree Krishna Traders",
 
-  image: "https://dagatea.company/images/logo.png",
-  url: "https://dagatea.company",
+  image: `${baseUrl}/images/logo.png`,
+  url: baseUrl,
 
   telephone: "+91-8005714740",
 
