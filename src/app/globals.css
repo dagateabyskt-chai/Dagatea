@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-playfair);
+}
+
+/* Headings use Playfair */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif;
+}
+
+/* nextjs-portal {
+  display: none !important;
+} */
