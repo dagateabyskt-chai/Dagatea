@@ -5,16 +5,6 @@ import blackGold from "../../public/images/black-gold.webp"
 import mttGreen from "../../public/images/mtt-green-tea.webp"
 import dagatea from "../../public/images/daga-premium-tea.webp"
 
-const baseUrl = process.env.NEXT_PUBLIC_HOST;
-
-const images = [
-        `${baseUrl}/images/daga-tea-premium.webp`,
-        `${baseUrl}/images/black-gold.webp`,
-        `${baseUrl}/images/daga-tea-red.webp`,
-        `${baseUrl}/images/daga-tea-green.webp`,
-        `${baseUrl}/images/mtt-green-tea.webp`,
-      ]
-
 export const cardData = [
     {
         Product: "Daga Tea Premium",

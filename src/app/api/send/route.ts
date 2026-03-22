@@ -22,12 +22,10 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
+        
+        const business_name = isWholesale ? validData.data.business_name : "";
 
-        const { customer_name, email, phone, message, business_name = "" } = validData.data;
-
-        // to: ['dagakrishna70@gmail.com'],
-        // from: 'Enquiry <onboarding@vcji.webdev.in>', // change later to your domain
-        // to: ['vchandak2006@gmail.com'],
+        const { customer_name, email, phone, message } = validData.data;
 
         const newEnquiry = await resend.emails.send({
             from: 'Enquiry <onboarding@resend.dev>', // change later to your domain
