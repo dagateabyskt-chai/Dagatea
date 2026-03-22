@@ -20,7 +20,9 @@ export const metadata: Metadata = {
     "bulk tea supplier India",
     "loose tea supplier",
     "Shree Krishna Traders",
-    "tea distributor India"
+    "tea distributor India",
+    "chai trader",
+    "Assam tea",
   ],
 
   // Author & branding
@@ -142,7 +144,7 @@ const schema = {
     },
 
     // 🔥 BUSINESS INFO
-    priceRange: "₹50₹500",
+    priceRange: "₹50 ₹500",
 
     // 🔥 BRAND
     brand: {

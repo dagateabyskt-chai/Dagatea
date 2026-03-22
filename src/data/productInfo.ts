@@ -29,7 +29,7 @@ export const cardData = [
         Price: ["1kg", "500g", "250g"],
         Size: ["₹280", "₹140", "₹70"],
         Category: "Assam CTC Tea",
-        Description: "Black Gold is a premium strong tea blend known for its intense flavor and superior color. Designed for tea lovers who enjoy a kadak chai experience, it stands out with its richness and long-lasting taste.",
+        Description: "Black Gold is a strong tea blend known for its intense flavor and superior color. Designed for tea lovers who enjoy a kadak chai experience, it stands out with its richness and long-lasting taste.",
         Specification: {
             "Aroma": "Rich and intense",
             "Taste": "Strong, bold, slightly astringent",
@@ -47,7 +47,7 @@ export const cardData = [
         Price: ["1kg", "500g", "250g"],
         Size: ["₹360", "₹180", "₹90"],
         Category: "Assam CTC Tea",
-        Description: "Daga Tea Red is a strong and refreshing Assam CTC tea crafted for everyday enjoyment. It delivers a bold taste with a rich color, making it perfect for traditional Indian milk tea (chai). Ideal for households and retailers looking for consistent quality at an affordable price.",
+        Description: "Daga Tea Red is a premium strong and refreshing Assam CTC tea crafted for everyday enjoyment. It delivers a bold taste with a rich color, making it perfect for traditional Indian milk tea (chai). Ideal for households and retailers looking for consistent quality at an affordable price.",
         Specification: {
             "Aroma": "Strong and malty",
             "Taste": "Bold, full-bodied with slight bitterness",
@@ -80,8 +80,8 @@ export const cardData = [
     },
     {
         Product: "MTT Green Tea",
-        Price: ["1kg", "500g", "250g"],
-        Size: ["₹340", "₹170", "₹85"],
+        Price: ["250g", "100g", "50g"],
+        Size: ["₹250", "₹100", "₹50"],
         Category: "Green Tea",
         Description: "MTT Green Tea is a refreshing and health-focused tea crafted from carefully selected leaves. Known for its light taste and wellness benefits, it is ideal for a healthy lifestyle.",
         Specification: {

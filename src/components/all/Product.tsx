@@ -36,7 +36,7 @@ const features = () => {
                         <p className="">{value.Category}</p>
                     </div>
 
-                    <p className="w-fit font-bold text-xl px-4 py-1 border-b border-[#f6eee0] rounded-lg">Available Sizes:</p>
+                    <p className="w-fit font-bold text-xl px-4 py-1 border-b border-[#f6eee0] rounded-lg">Different weight packs:</p>
                     {[...Array(3)].map((_, i) => {
                         return (
                             <div key={i} className="flex gap-2 leading-2 flex-wrap">
