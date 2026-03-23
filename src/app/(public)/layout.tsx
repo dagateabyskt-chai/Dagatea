@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/all/Header";
 import { ThemeProvider } from "@/context/theme-provider";
 import Footer from "@/components/all/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const poppins = Poppins(
   {
@@ -201,9 +202,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="">
-            {children}
-          </main>
+          {children}
+          <Analytics/>
           <Footer />
         </ThemeProvider>
       </body>
