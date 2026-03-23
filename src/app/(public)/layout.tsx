@@ -5,6 +5,7 @@ import Header from "@/components/all/Header";
 import { ThemeProvider } from "@/context/theme-provider";
 import Footer from "@/components/all/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const poppins = Poppins(
   {
@@ -204,6 +205,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Analytics/>
+          <SpeedInsights/>
           <Footer />
         </ThemeProvider>
       </body>
