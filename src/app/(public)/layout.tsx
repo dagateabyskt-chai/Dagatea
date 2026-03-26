@@ -31,15 +31,25 @@ export const metadata: Metadata = {
     template: "%s | Daga Tea",
   },
 
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
+
   description:
     "Daga Tea Traders & Shree Krishna Traders are leading suppliers of premium Assam CTC tea in Bikaner, Rajasthan. We offer high-quality loose and packet tea for wholesalers, retailers, and bulk buyers across India at competitive prices.",
 
   keywords: [
     "Daga Tea",
     "Assam CTC tea supplier India",
+    "tea near me",
     "tea wholesaler Rajasthan",
     "bulk tea supplier India",
     "loose tea supplier Bikaner",
+    "tea traders in Rajasthan",
+    "tea wholesalers in Rajasthan",
+    "tea supplier in Rajasthan",
     "tea distributor Rajasthan",
     "buy tea in bulk India",
     "premium Assam tea supplier",
@@ -134,6 +144,7 @@ const schema = {
 
   image: `${baseUrl}/images/logo.png`,
   url: baseUrl,
+  logo: `${baseUrl}/images/logo.png`,
 
   telephone: "+91-8005714740",
 
