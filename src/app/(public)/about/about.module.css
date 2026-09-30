@@ -1,0 +1,573 @@
+.page {
+  --about-canvas: #faf7f1;
+  --about-surface: #fcfaf7;
+  --about-card: #faf6ee;
+  --about-inset: #f5eee3;
+  --about-frame: #fffefa;
+  --about-ink: #102219;
+  --about-body: #494237;
+  --about-muted: #70675b;
+  --about-border: #e6d8c6;
+  --about-accent: #a24b14;
+  --about-icon-surface: #e5e6dc;
+  --about-icon-ink: #244330;
+  --about-warm-icon-surface: #f2e3d2;
+  --about-frame-shadow: 0 4px 12px #303b2726, 0 0 16px #bda27130;
+  --about-banner-start: #153728;
+  --about-banner-end: #224c39;
+  --about-banner-ink: #fffaf0;
+  --about-banner-gold: #f1cd88;
+  --about-banner-border: #0e3d29;
+  color: var(--about-body);
+  background: var(--about-canvas);
+  /* Keep the existing fixed site header clear of the page content. */
+  padding-top: 104px;
+  padding-bottom: 80px;
+  font-size: clamp(14px, 1.17vw, 17px);
+  line-height: 1.6;
+}
+
+.container {
+  width: min(85%, 1200px);
+  margin-inline: auto;
+}
+
+.heritageBand {
+  padding: 18px 24px 16px;
+  background: var(--about-inset);
+  text-align: center;
+}
+
+.heritageName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--about-ink);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.heritageName::before,
+.heritageName::after {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+  flex-shrink: 0;
+}
+
+.heritageTrust {
+  color: var(--about-accent);
+  font-size: 13px;
+  letter-spacing: 0.015em;
+}
+
+.heritageLocation {
+  color: var(--about-muted);
+  font-size: 11px;
+}
+
+.hero {
+  max-width: 960px;
+  margin-inline: auto;
+  padding-block: 68px 64px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--about-accent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  width: 58px;
+  height: 1px;
+  background: var(--about-border);
+  content: "";
+}
+
+.hero h1 {
+  margin: 20px 0 28px;
+  color: var(--about-ink);
+  font-size: clamp(34px, 3.9vw, 54px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.heroDescription {
+  max-width: 740px;
+  margin-inline: auto;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(26px, 3.2vw, 44px);
+  border: 1px solid var(--about-border);
+  border-radius: 24px;
+  background: var(--about-surface);
+  box-shadow: 0 2px 2px #543d2104;
+}
+
+.photoFrame {
+  min-width: 0;
+  margin: 0;
+  padding: 8px 8px 0;
+  border: 1px solid var(--about-border);
+  border-radius: 18px;
+  background: var(--about-frame);
+  box-shadow: var(--about-frame-shadow);
+}
+
+.photoMat {
+  display: flex;
+  align-items: center;
+  aspect-ratio: 4 / 4.5;
+  overflow: hidden;
+  border-radius: 11px;
+  background: var(--about-inset);
+}
+
+.photoMat img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.photoFrame figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 8px;
+  padding: 11px 7px 13px;
+  border-top: 1px solid var(--about-border);
+  color: var(--about-muted);
+  font-size: 10px;
+  letter-spacing: 0.025em;
+}
+
+.photoFrame figcaption span:last-child {
+  color: var(--about-ink);
+  font-weight: 500;
+}
+
+.storyCopy {
+  min-width: 0;
+}
+
+.storyCopy > p {
+  margin-top: 20px;
+}
+
+.traditionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 13px;
+  border-radius: 999px;
+  background: var(--about-inset);
+  color: var(--about-ink);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+}
+
+.storyLead {
+  color: var(--about-ink);
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.6;
+}
+
+.page strong {
+  font-weight: 600;
+}
+
+.hubs {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border: 1px solid var(--about-border);
+  border-radius: 12px;
+  background: var(--about-inset);
+}
+
+.hubs h2 {
+  margin-bottom: 9px;
+  color: var(--about-accent);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.hubs .list {
+  margin: 0;
+  color: var(--about-ink);
+}
+
+.list {
+  padding-left: 16px;
+  list-style: disc;
+}
+
+.list li {
+  padding-left: 2px;
+}
+
+.list li + li {
+  margin-top: 8px;
+}
+
+.list li::marker {
+  color: var(--about-accent);
+  font-size: 0.85em;
+}
+
+.featureGrid,
+.purposeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.featureGrid {
+  margin-top: 64px;
+}
+
+.purposeGrid {
+  margin-top: 32px;
+}
+
+.featureCard,
+.purposeCard {
+  min-width: 0;
+  padding: 32px;
+  border: 1px solid var(--about-border);
+  border-radius: 16px;
+  background: var(--about-card);
+  box-shadow: 0 2px 2px #543d2105;
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 18px;
+  color: var(--about-ink);
+  font-size: clamp(23px, 2vw, 28px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.iconCircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--about-icon-surface);
+  color: var(--about-icon-ink);
+  flex-shrink: 0;
+}
+
+.featureCard > .list {
+  margin-block: 20px 26px;
+}
+
+.featureCard > .cardNote {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--about-border);
+  font-size: 0.88em;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.purposeCard {
+  padding: 28px;
+}
+
+.purposeCard .cardHeading {
+  margin-bottom: 12px;
+  font-size: clamp(21px, 1.8vw, 25px);
+}
+
+.purposeCard .iconCircle {
+  width: 34px;
+  height: 34px;
+}
+
+.missionIcon {
+  background: var(--about-warm-icon-surface);
+  color: var(--about-accent);
+}
+
+.commitment {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: 64px;
+  padding: 40px;
+  border: 1px solid var(--about-banner-border);
+  border-radius: 24px;
+  background: linear-gradient(110deg, var(--about-banner-start), var(--about-banner-end));
+  color: var(--about-banner-ink);
+  box-shadow: 0 6px 12px #15372814;
+}
+
+.commitment::after {
+  position: absolute;
+  z-index: -1;
+  right: -40px;
+  bottom: -54px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: #b3d1b312;
+  content: "";
+  pointer-events: none;
+}
+
+.commitmentEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--about-banner-gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.commitment h2 {
+  margin: 18px 0 12px;
+  font-size: clamp(29px, 2.6vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.commitmentDescription {
+  max-width: 1000px;
+}
+
+:global(.dark) .page {
+  color-scheme: dark;
+  --about-canvas: #1f1711;
+  --about-surface: #2a2018;
+  --about-card: #2a2018;
+  --about-inset: #33271e;
+  --about-frame: #362b21;
+  --about-ink: #f6eee0;
+  --about-body: #d2c4b2;
+  --about-muted: #b9a995;
+  --about-border: #584432;
+  --about-accent: #e6ad72;
+  --about-icon-surface: #304331;
+  --about-icon-ink: #c4dbbc;
+  --about-warm-icon-surface: #493322;
+  --about-frame-shadow: 0 5px 18px #00000040;
+  --about-banner-start: #172d22;
+  --about-banner-end: #254331;
+  --about-banner-ink: #f6eee0;
+  --about-banner-gold: #e9c48b;
+  --about-banner-border: #48654b;
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    padding-block: 54px;
+  }
+
+  .story {
+    gap: 32px;
+    padding: 28px;
+  }
+
+  .storyCopy > p,
+  .hubs {
+    margin-top: 17px;
+  }
+
+  .storyLead {
+    font-size: 16px;
+  }
+
+  .featureGrid,
+  .purposeGrid {
+    gap: 26px;
+  }
+
+  .featureGrid,
+  .commitment {
+    margin-top: 52px;
+  }
+
+  .featureCard {
+    padding: 26px;
+  }
+
+  .purposeGrid {
+    margin-top: 26px;
+  }
+
+  .purposeCard {
+    padding: 24px;
+  }
+
+  .commitment {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding-bottom: 56px;
+    font-size: 15px;
+  }
+
+  .container {
+    width: calc(100% - 40px);
+  }
+
+  .heritageBand {
+    padding: 17px 20px;
+  }
+
+  .heritageName,
+  .heritageTrust {
+    font-size: 11px;
+  }
+
+  .heritageLocation {
+    max-width: 360px;
+    margin: 4px auto 0;
+    font-size: 10px;
+  }
+
+  .hero {
+    padding-block: 42px;
+  }
+
+  .eyebrow {
+    gap: 12px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    width: 26px;
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    margin-block: 18px 22px;
+    font-size: clamp(31px, 6.5vw, 44px);
+    line-height: 1.15;
+  }
+
+  .heroDescription {
+    font-size: 15px;
+  }
+
+  .story {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .photoFrame {
+    width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  .photoMat {
+    aspect-ratio: auto;
+  }
+
+  .featureGrid,
+  .purposeGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .featureGrid {
+    margin-top: 32px;
+  }
+
+  .purposeGrid {
+    margin-top: 20px;
+  }
+
+  .featureCard,
+  .purposeCard {
+    padding: 24px;
+  }
+
+  .featureCard > .list {
+    margin-block: 18px 24px;
+  }
+
+  .cardHeading {
+    font-size: 25px;
+  }
+
+  .commitment {
+    margin-top: 32px;
+    padding: 30px 24px;
+    border-radius: 20px;
+  }
+
+  .commitmentEyebrow {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 379px) {
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .story,
+  .featureCard,
+  .purposeCard,
+  .commitment {
+    padding-inline: 20px;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    width: 12px;
+  }
+}
