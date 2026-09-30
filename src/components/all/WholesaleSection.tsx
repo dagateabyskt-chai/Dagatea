@@ -1,262 +1,127 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, CheckCircle } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { WholesaleEnquirySchema, wholesaleEnquirySchema } from '@/schema/WholesaleEnquiry';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Bounce, toast } from 'react-toastify';
+"use client";
 
-export default function WholesaleSection() {
-  const defaultFormState: WholesaleEnquirySchema = {
-      customer_name: '',
-      business_name: '',
-      email: '',
-      phone: '',
-      message: ''
-    };
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-  
-    const {
-      register,
-      handleSubmit,
-      reset,
-      formState: { errors },
-    } = useForm({
-      resolver: zodResolver(wholesaleEnquirySchema),
-      defaultValues: defaultFormState
-    });
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Check, CheckCircle, LoaderCircle } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { type WholesaleEnquirySchema, wholesaleEnquirySchema } from "@/schema/WholesaleEnquiry";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+import HomeReveal from "@/components/home/HomeReveal";
+import styles from "@/components/home/home.module.css";
+
+const defaultFormState: WholesaleEnquirySchema = {
+  customer_name: "",
+  business_name: "",
+  email: "",
+  phone: "",
+  message: "",
+};
+
+const benefits = [
+  "Competitive wholesale pricing",
+  "Consistent supply chain",
+  "Quality assurance on every batch",
+  "Flexible packaging options",
+];
+
+export default function WholesaleSection({ motionEnabled = true }: { motionEnabled?: boolean }) {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<WholesaleEnquirySchema>({
+    resolver: zodResolver(wholesaleEnquirySchema),
+    defaultValues: defaultFormState,
+    shouldFocusError: true,
+  });
 
   const onSubmit = async (data: WholesaleEnquirySchema) => {
-    setIsSubmitting(true);
-
+    setSubmissionError("");
     try {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      const requestOptions = {
+      const response = await fetch("/api/send", {
         method: "POST",
-        headers: myHeaders,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
-      };
-
-      const response = await fetch(`/api/send`, requestOptions)
+      });
       const result = await response.json();
-      if (result.success) {
-        toast.success(result.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        })
-        setIsSuccess(true);
-      } else {
-        toast.error(result.message, { 
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        })
+      if (!response.ok || !result.success) {
+        const message = typeof result.message === "string" ? result.message : "Error in submitting form";
+        setSubmissionError(message);
+        toast.error(message, { role: "presentation" });
+        return;
       }
       reset();
-    } catch (error: any) {
-      console.error("Error in submitting form", error)
-      toast.error("Error in submitting form", { position: "top-center", style: { backgroundColor: "red", color: "white" } })
+      setIsSuccess(true);
+      toast.success(typeof result.message === "string" ? result.message : "Your inquiry has been submitted successfully.", { role: "presentation" });
+    } catch {
+      setSubmissionError("Error in submitting form");
+      toast.error("Error in submitting form", { role: "presentation" });
     }
-    
-    setIsSubmitting(false);
-    setTimeout(() => setIsSuccess(false), 5000);
   };
 
   return (
-    <section id="wholesale" className="py-32 bg-[#fbeacd] dark:bg-[#3f2901] text-[#3f2903] dark:text-[#f4d5a1] relative overflow-auto">
-      <div className="max-w-400 mx-auto px-6 md:px-12">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="h-px w-12 dark:bg-[#fbeacd] bg-[#825301]" />
-              <span className="text-sm font-semibold tracking-[0.2em] uppercase">
-                Partner With Us
-              </span>
-            </div>
-            <h2 className="font-heading text-5xl md:text-6xl mb-6 leading-tight">
-              Wholesale & Retail Inquiry
-            </h2>
-            <p className="text-xl mb-8 leading-relaxed">
-              Ready to partner with Rajasthan's most trusted tea supplier? Fill out the form and our team will get back to you within 24 hours.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full" />
-                <span>Competitive wholesale pricing</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full" />
-                <span>Consistent supply chain</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full" />
-                <span>Quality assurance on every batch</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full" />
-                <span>Flexible packaging options</span>
-              </div>
-            </div>
-          </motion.div>
+    <section id="wholesale" className={styles.wholesale} aria-labelledby="wholesale-title">
+      <div className={`${styles.container} ${styles.wholesaleGrid}`}>
+        <HomeReveal enabled={motionEnabled} x={-40} y={0} className={styles.wholesaleCopy}>
+          <span className={styles.eyebrow}>Partner With Us</span>
+          <h2 id="wholesale-title">Wholesale &amp; Retail Inquiry</h2>
+          <p>Ready to partner with Rajasthan&apos;s most trusted tea supplier? Fill out the form and our team will get back to you within 24 hours.</p>
+          <ul className={styles.wholesaleBenefits}>
+            {benefits.map((benefit) => <li key={benefit}><Check size={17} aria-hidden="true" />{benefit}</li>)}
+          </ul>
+        </HomeReveal>
 
-          {/* Right Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-[#825301]/5 dark:bg-[#fbeacd]/5 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-[#3f2903] dark:border-[#f6eee0]"
-          >
-            {isSuccess ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-12"
-              >
-                <CheckCircle className="w-16 h-16 mx-auto mb-6" />
-                <h3 className="text-3xl text-foreground mb-4">
-                  Thank You!
-                </h3>
-                <p className="font-paragraph">
-                  Your inquiry has been submitted successfully. We'll contact you soon.
-                </p>
+        <HomeReveal enabled={motionEnabled} x={40} y={0} className={styles.formCard}>
+          <div role="status" aria-live="polite" aria-atomic="true">
+            {isSuccess && (
+              <motion.div initial={motionEnabled ? { opacity: 0, scale: 0.9 } : false} animate={{ opacity: 1, scale: 1 }} className={styles.successMessage}>
+                <CheckCircle size={56} aria-hidden="true" />
+                <h3>Thank You!</h3>
+                <p>Your inquiry has been submitted successfully. We&apos;ll contact you soon.</p>
+                <button type="button" className={styles.secondaryButton} onClick={() => setIsSuccess(false)}>Send another inquiry</button>
               </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border-2 border-[#98650e] dark:border-[#f6eee0]/60 rounded-2xl focus:outline-none transition-colors"
-                    placeholder="Enter your full name"
-                    {...register("customer_name", {
-                      required: {
-                        value: true,
-                        message: "Name is required"
-                      }
-                    })}
-                  />
-                {errors.customer_name && <div className='text-red-600'>{errors.customer_name.message as React.ReactNode || "Please Enter Valid Input"}</div>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Business Name *
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border-2 border-[#98650e] dark:border-[#f6eee0]/60 rounded-2xl focus:outline-none transition-colors"
-                    placeholder="Your business name"
-                    {...register("business_name", {
-                      required: {
-                        value: true,
-                        message: "Business Name is required"
-                      }
-                    })}
-                  />
-                {errors.business_name && <div className='text-red-600'>{errors.business_name.message as React.ReactNode || "Please Enter Valid Input"}</div>}
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      className="w-full px-4 py-3 border-2 border-[#98650e] dark:border-[#f6eee0]/60 rounded-2xl focus:outline-none transition-colors"
-                      placeholder="8005714740"
-                      {...register("phone", {
-                      required: {
-                        value: true,
-                        message: "Phone Number is required"
-                      }
-                    })}
-                    />
-                    {errors.phone && <div className='text-red-600'>{errors.phone.message as React.ReactNode || "Please Enter Valid Input"}</div>}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 border-2 border-[#98650e] dark:border-[#f6eee0]/60 rounded-2xl focus:outline-none transition-colors"
-                      placeholder="your@email.com"
-                      {...register("email", {
-                      required: {
-                        value: true,
-                        message: "Email is required"
-                      }
-                    })}
-                    />
-                    {errors.email && <div className='text-red-600'>{errors.email.message as React.ReactNode || "Please Enter Valid Input"}</div>}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Your Requirements *
-                  </label>
-                  <textarea
-                    rows={5}
-                    className="w-full px-4 py-3 border-2 border-[#98650e] dark:border-[#f6eee0]/60 rounded-2xl focus:outline-none transition-colors resize-none"
-                    placeholder="Tell us about your requirements (quantity, type, delivery location, etc.)"
-                    {...register("message", {
-                      required: {
-                        value: true,
-                        message: "Requirements are required"
-                      }
-                    })}
-                  />
-                {errors.message && <div className='text-red-600'>{errors.message.message as React.ReactNode || "Please Enter Valid Input"}</div>}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-3 hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-amber-900 dark:border-[#f6eee0]/60 border-t-primary-foreground rounded-full animate-spin" />
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      Submit Inquiry
-                      <Send className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-              </form>
             )}
-          </motion.div>
-        </div>
+          </div>
+          {!isSuccess && (
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.inquiryForm} aria-labelledby="wholesale-title" aria-busy={isSubmitting} noValidate>
+              <div className={styles.formField}>
+                <label htmlFor="wholesale-name">Your Name *</label>
+                <input id="wholesale-name" type="text" autoComplete="name" required aria-invalid={Boolean(errors.customer_name)} aria-describedby={errors.customer_name ? "wholesale-name-error" : undefined} placeholder="Enter your full name" {...register("customer_name")} />
+                {errors.customer_name && <p id="wholesale-name-error" className={styles.fieldError}>{errors.customer_name.message || "Please Enter Valid Input"}</p>}
+              </div>
+              <div className={styles.formField}>
+                <label htmlFor="wholesale-business">Business Name *</label>
+                <input id="wholesale-business" type="text" autoComplete="organization" required aria-invalid={Boolean(errors.business_name)} aria-describedby={errors.business_name ? "wholesale-business-error" : undefined} placeholder="Your business name" {...register("business_name")} />
+                {errors.business_name && <p id="wholesale-business-error" className={styles.fieldError}>{errors.business_name.message || "Please Enter Valid Input"}</p>}
+              </div>
+              <div className={styles.formRow}>
+                <div className={styles.formField}>
+                  <label htmlFor="wholesale-phone">Phone Number *</label>
+                  <input id="wholesale-phone" type="tel" inputMode="tel" autoComplete="tel-national" required aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "wholesale-phone-error" : undefined} placeholder="8005714740" {...register("phone")} />
+                  {errors.phone && <p id="wholesale-phone-error" className={styles.fieldError}>{errors.phone.message || "Please Enter Valid Input"}</p>}
+                </div>
+                <div className={styles.formField}>
+                  <label htmlFor="wholesale-email">Email Address *</label>
+                  <input id="wholesale-email" type="email" autoComplete="email" required aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "wholesale-email-error" : undefined} placeholder="your@email.com" {...register("email")} />
+                  {errors.email && <p id="wholesale-email-error" className={styles.fieldError}>{errors.email.message || "Please Enter Valid Input"}</p>}
+                </div>
+              </div>
+              <div className={styles.formField}>
+                <label htmlFor="wholesale-message">Your Requirements *</label>
+                <textarea id="wholesale-message" rows={5} required aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "wholesale-message-error" : undefined} placeholder="Tell us about your requirements (quantity, type, delivery location, etc.)" {...register("message")} />
+                {errors.message && <p id="wholesale-message-error" className={styles.fieldError}>{errors.message.message || "Please Enter Valid Input"}</p>}
+              </div>
+              {submissionError && <p className={styles.submissionError} role="alert">{submissionError}</p>}
+              <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
+                {isSubmitting ? <><LoaderCircle size={18} className={styles.spinner} aria-hidden="true" />Submitting...</> : <>Submit Inquiry <Send size={18} aria-hidden="true" /></>}
+              </button>
+            </form>
+          )}
+        </HomeReveal>
       </div>
     </section>
   );
