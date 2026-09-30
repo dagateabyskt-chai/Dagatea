@@ -1,98 +1,98 @@
-"use client"
-import { SetStateAction, useState } from "react"
-import Image from "next/image"
-import { motion } from "motion/react"
+import Image from "next/image";
+import { cardData } from "@/data/productInfo";
+import styles from "@/components/products/collection.module.css";
 
-import { cardData } from "@/data/productInfo"
+export type ProductFilter = "All Varieties" | "Assam CTC Tea" | "Green Tea" | "Kadak Blends";
 
-const features = () => {
-    const [more, setMore] = useState(-1);
-    const showMore = (index: number) => {
-        setMore((prev: SetStateAction<number>) => (prev === index ? -1 : index))
-    }
-    return (cardData.map((value, index) => {
+const presentation: Record<string, { tone: string; liquor: string }> = {
+  "Daga Tea Premium": { tone: "premium", liquor: "#98330e" },
+  "Black Gold": { tone: "black", liquor: "#541e0e" },
+  "Daga Tea Red": { tone: "red", liquor: "#a43220" },
+  "Daga Tea Blue": { tone: "blue", liquor: "#d8840b" },
+  "MTT Green Tea": { tone: "green", liquor: "#83a78b" },
+};
+
+export function filterProducts(filter: ProductFilter) {
+  return cardData.filter((product) => {
+    if (filter === "All Varieties") return true;
+    if (filter === "Kadak Blends") return product.Specification["Ideal For"] === "Kadak chai lovers";
+    return product.Category === filter;
+  });
+}
+
+export default function Product({ filter = "All Varieties" }: { filter?: ProductFilter }) {
+  return (
+    <div className={styles.grid}>
+      {filterProducts(filter).map((product) => {
+        const specification = product.Specification;
+        const appearance = presentation[product.Product];
+        const productId = product.Product.toLowerCase().replace(/\s+/g, "-");
+
         return (
-            <section key={index} className='rounded-2xl bg-[#1f190f]/20 dark:bg-[#1f190f] text-sm md:text-base px-6.75 flex flex-col-reverse lg:flex-row h-full'>
-                <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="flex flex-col gap-4 lg:w-2/3 my-4"
-                >
-                    <h2 className="text-3xl lg:text-5xl font-extrabold">{value.Product}</h2>
+          <article
+            key={product.Product}
+            id={productId}
+            aria-labelledby={`${productId}-title`}
+            className={styles.card}
+            data-tone={appearance?.tone}
+          >
+            <div className={styles.cardIntro}>
+              <div className={styles.cardCopy}>
+                <span className={styles.category}>{product.Category}</span>
+                <span className={styles.badge}>{specification["Ideal For"]}</span>
+                <h2 id={`${productId}-title`}>{product.Product}</h2>
+                <p className={styles.description}>{product.Description}</p>
+              </div>
+              <div className={styles.productImage}>
+                <Image
+                  src={product.img}
+                  alt={`${product.Product} - ${product.Category}`}
+                  sizes="(max-width: 479px) 104px, (max-width: 767px) 144px, (max-width: 1199px) 128px, 160px"
+                  loading="lazy"
+                />
+              </div>
+            </div>
 
-                    <div onClick={() => showMore(index)} className="flex gap-0.5 flex-col">
-                        <div className={`${more === index ? "line-clamp-none" : "line-clamp-3"}`}>
-                            {value.Description?.split("\n").map((line, i) => (
-                                <p key={i} className="leading-7">{line}</p>
-                            ))}
-                        </div>
-                    </div>
+            <div className={styles.cardDetails}>
+              <h3 className={styles.packHeading}>Available weight packs</h3>
+              <ul className={styles.packs} aria-label={`${product.Product} pack prices`}>
+                {product.Price.map((weight, index) => (
+                  <li key={weight}>
+                    <span>{weight}</span>
+                    <strong>{product.Size[index]}</strong>
+                  </li>
+                ))}
+              </ul>
 
-
-                    <div className="flex gap-1 flex-wrap">
-                        <p className="text-[#f6eee0]/30 font-semibold">Category:</p>
-                        <p className="">{value.Category}</p>
-                    </div>
-
-                    <p className="w-fit font-bold text-xl px-4 py-1 border-b border-[#f6eee0] rounded-lg">Different weight packs:</p>
-                    {[...Array(3)].map((_, i) => {
-                        return (
-                            <div key={i} className="flex gap-2 leading-2 flex-wrap">
-                                <p className="pl-4">- {value.Price[i]}:</p>
-                                <p className="pl-4">{value.Size[i]}</p>
-                            </div>
-                        )
-                    })}
-
-                        <p className="w-fit font-bold text-xl px-4 py-1 border-b border-[#f6eee0] rounded-lg">Specification</p>
-                        <div className="flex flex-col gap-1.5">
-                        {Object.entries(value.Specification).map(([k, v], i) => {
-                            return(
-                                <div key={i} className="flex gap-1 md:gap-3">
-                                    <p className="leading-none text-[#f6eee0]/30">{k}</p>
-                                    <p className="leading-none">{v}</p>
-                                </div>
-                            )}
-                        )}
-                    </div>
-                    </motion.div>
-                <motion.div 
-                    initial={{ opacity: 0, y: -50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="lg:w-1/3 max-w-75 h-fit rounded-3xl overflow-hidden my-4"
-                >
-                    <Image
-                        src={value.img}
-                        alt={`${value.Product} - Assam CTC Tea`}
-                        width={500}
-                        height={500}
-                        className="object-cover object-center"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        loading="lazy"
-                    />
-                </motion.div>
-            </section>)
-    }))
+              <dl className={styles.specifications}>
+                <div className={styles.specRow}>
+                  <dt>Liquor Hue</dt>
+                  <dd className={styles.liquor}>
+                    <span className={styles.swatch} style={{ backgroundColor: appearance?.liquor }} aria-hidden="true" />
+                    {specification.Liquor}
+                  </dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Aroma &amp; Taste</dt>
+                  <dd>{specification.Aroma} <span aria-hidden="true">•</span> {specification.Taste}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Leaf Grade &amp; Origin</dt>
+                  <dd>{specification["Leaf Grade"]} <span aria-hidden="true">•</span> {specification.Origin}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Caffeine / Serving</dt>
+                  <dd>{specification.Caffeine} <span aria-hidden="true">•</span> {specification["Best Served"]}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Ideal For</dt>
+                  <dd className={styles.idealFor}>{specification["Ideal For"]}</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
 }
-
-const Product = () => {
-    return (
-        <div className="py-10 grid md:grid-cols-2 gap-2 max-w-336 mx-auto">
-            {
-                features().map((Element, index) => {
-                    return (
-                        <div key={index} className="h-full">
-                            {Element}
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
-}
-
-export default Product;
