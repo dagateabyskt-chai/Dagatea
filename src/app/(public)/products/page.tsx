@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import { baseUrl } from "@/lib/site";
 import ProductsPage from "./ProductsPage";
 import { cardData } from "@/data/productInfo";
-
-const baseUrl = process.env.NEXT_PUBLIC_HOST;
 
 export const metadata: Metadata = {
   title: {

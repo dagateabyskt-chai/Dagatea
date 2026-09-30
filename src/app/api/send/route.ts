@@ -23,7 +23,9 @@ export async function POST(request: Request) {
             );
         }
         
-        const business_name = isWholesale ? validData.data.business_name : "";
+        const business_name = "business_name" in validData.data && typeof validData.data.business_name === "string"
+            ? validData.data.business_name
+            : "";
 
         const { customer_name, email, phone, message } = validData.data;
 

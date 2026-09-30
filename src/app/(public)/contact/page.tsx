@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
+import { baseUrl } from "@/lib/site";
 import ContactPage from "./ContactPage";
-
-const baseUrl = process.env.NEXT_PUBLIC_HOST;
 
 export const metadata: Metadata = {
   title: {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { baseUrl } from "@/lib/site";
 import { Poppins, Playfair_Display } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/all/Header";
@@ -21,8 +22,6 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
 });
-
-const baseUrl = process.env.NEXT_PUBLIC_HOST;
 
 export const metadata: Metadata = {
   title: {

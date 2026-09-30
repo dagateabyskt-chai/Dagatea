@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
+import { baseUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_HOST;
-
   return [
     {
       url: `${baseUrl}`,

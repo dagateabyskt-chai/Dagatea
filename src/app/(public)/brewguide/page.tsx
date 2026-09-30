@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
+import { baseUrl } from "@/lib/site";
 import BrewingGuidePage from "./BrewGuidePage";
-
-const baseUrl = process.env.NEXT_PUBLIC_HOST;
 
 export const metadata: Metadata = {
   title: {
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   creator: "Daga Tea",
   publisher: "Daga Tea Traders",
 
-  metadataBase: new URL(`${baseUrl}`),
+  metadataBase: new URL(baseUrl),
 
   robots: {
     index: true,
